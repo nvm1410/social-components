@@ -44,7 +44,7 @@
     "start": "react-scripts start  --openssl-legacy-provider",
     "build": "react-scripts build --openssl-legacy-provider",
     "build-modules": "rm -rf dist && NODE_ENV=production babel src/lib --out-dir dist --copy-files --ignore __tests__,spec.js,test.js,__snapshots__",
-    "build-microbundle": "microbundle-crl --css-modules true --compress false --no-compress --format modern,esm",
+    "build-microbundle": "microbundle-crl --css-modules true --compress false --no-compress --format modern,esm --jsxFragment React.Fragment",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },

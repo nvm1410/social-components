@@ -1727,7 +1727,7 @@ function ConnectButton({
       setConnectModalVis(true);
     }
   }
-  return /*#__PURE__*/React.createElement(Fragment, null, /*#__PURE__*/React.createElement("button", {
+  return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("button", {
     className: styles$2.connectBtn,
     style: style ? style : {
       ...getStyle("button-main", theme, "main"),
@@ -2111,7 +2111,7 @@ function NFT({
   }, /*#__PURE__*/React.createElement("div", {
     ref: hoverNft,
     className: styles$7.nftImageContainer
-  }, nft.media && ((_nft$media2 = nft.media) === null || _nft$media2 === void 0 ? void 0 : _nft$media2.length) > 0 && /*#__PURE__*/React.createElement(Fragment, null, nft.media[0].thumbnail ? /*#__PURE__*/React.createElement("img", {
+  }, nft.media && ((_nft$media2 = nft.media) === null || _nft$media2 === void 0 ? void 0 : _nft$media2.length) > 0 && /*#__PURE__*/React.createElement(React.Fragment, null, nft.media[0].thumbnail ? /*#__PURE__*/React.createElement("img", {
     src: nft.media[0].thumbnail
   }) : /*#__PURE__*/React.createElement("img", {
     src: nft.media[0].gateway
@@ -2249,7 +2249,7 @@ const UserPfp = ({
     clipRule: "evenodd",
     d: "M0.25 10C0.25 4.61522 4.61522 0.25 10 0.25C15.3848 0.25 19.75 4.61522 19.75 10C19.75 15.3848 15.3848 19.75 10 19.75C4.61522 19.75 0.25 15.3848 0.25 10ZM10 6.25C10.4142 6.25 10.75 6.58579 10.75 7V10.75C10.75 11.1642 10.4142 11.5 10 11.5C9.58579 11.5 9.25 11.1642 9.25 10.75V7C9.25 6.58579 9.58579 6.25 10 6.25ZM10 14.5C10.4142 14.5 10.75 14.1642 10.75 13.75C10.75 13.3358 10.4142 13 10 13C9.58579 13 9.25 13.3358 9.25 13.75C9.25 14.1642 9.58579 14.5 10 14.5Z",
     fill: "#FF3162"
-  })), _showBadge && details && details.profile && ((_details$profile2 = details.profile) === null || _details$profile2 === void 0 ? void 0 : _details$profile2.pfpIsNft) && /*#__PURE__*/React.createElement(Fragment, null, /*#__PURE__*/React.createElement("img", {
+  })), _showBadge && details && details.profile && ((_details$profile2 = details.profile) === null || _details$profile2 === void 0 ? void 0 : _details$profile2.pfpIsNft) && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("img", {
     style: {
       height: "1.25rem",
       width: "1.25rem"
@@ -2347,7 +2347,7 @@ const UserPopup = ({
     setShowProfileModal: setShowProfileModal,
     pfp: pfp,
     pfpNftDetails: pfpNftDetails
-  }) : /*#__PURE__*/React.createElement(Fragment, null, /*#__PURE__*/React.createElement("div", {
+  }) : /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("div", {
     className: styles$8.userPopupTopDetailsContainer
   }, /*#__PURE__*/React.createElement(UserPfp, {
     details: details,
@@ -2368,7 +2368,7 @@ const UserPopup = ({
     details: details
   }))), /*#__PURE__*/React.createElement("div", {
     className: styles$8.userPopupDetailsActionsContainer
-  }, user && user.did == details.did ? /*#__PURE__*/React.createElement(Fragment, null, /*#__PURE__*/React.createElement(Button, {
+  }, user && user.did == details.did ? /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(Button, {
     color: "primary",
     onClick: () => _setIsEditing(true)
   }, "Edit", /*#__PURE__*/React.createElement(EditIcon, null)), /*#__PURE__*/React.createElement("span", {
@@ -2548,7 +2548,7 @@ function UserCredentials({
         });
       });
     } else {
-      return /*#__PURE__*/React.createElement(Fragment, null, /*#__PURE__*/React.createElement(Alert, {
+      return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(Alert, {
         title: "User doesn't have any credentials yet.",
         style: {
           width: "100%",
@@ -2748,7 +2748,7 @@ const GitcoinProvider = ({
   if ((_credential$content18 = credential.content) !== null && _credential$content18 !== void 0 && (_credential$content19 = _credential$content18.credentialSubject) !== null && _credential$content19 !== void 0 && _credential$content19.provider.includes('TwitterFollowerGT')) {
     var _credential$content20, _credential$content21;
     let countTwitterFollowers = (_credential$content20 = credential.content) === null || _credential$content20 === void 0 ? void 0 : (_credential$content21 = _credential$content20.credentialSubject) === null || _credential$content21 === void 0 ? void 0 : _credential$content21.provider.replace('TwitterFollowerGT', '');
-    provider = /*#__PURE__*/React.createElement(Fragment, null, /*#__PURE__*/React.createElement(TwitterIcon, {
+    provider = /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(TwitterIcon, {
       style: {
         marginRight: 4,
         color: "#1DA1F2"
@@ -2760,7 +2760,7 @@ const GitcoinProvider = ({
   if ((_credential$content22 = credential.content) !== null && _credential$content22 !== void 0 && (_credential$content23 = _credential$content22.credentialSubject) !== null && _credential$content23 !== void 0 && _credential$content23.provider.includes('TwitterFollowerGTE')) {
     var _credential$content24, _credential$content25;
     let countTwitterFollowersGte = (_credential$content24 = credential.content) === null || _credential$content24 === void 0 ? void 0 : (_credential$content25 = _credential$content24.credentialSubject) === null || _credential$content25 === void 0 ? void 0 : _credential$content25.provider.replace('TwitterFollowerGTE', '');
-    provider = /*#__PURE__*/React.createElement(Fragment, null, /*#__PURE__*/React.createElement(TwitterIcon, {
+    provider = /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(TwitterIcon, {
       style: {
         marginRight: 4,
         color: "#1DA1F2"
@@ -2772,7 +2772,7 @@ const GitcoinProvider = ({
   if ((_credential$content26 = credential.content) !== null && _credential$content26 !== void 0 && (_credential$content27 = _credential$content26.credentialSubject) !== null && _credential$content27 !== void 0 && _credential$content27.provider.includes('TwitterTweetGT')) {
     var _credential$content28, _credential$content29;
     let countTweets = (_credential$content28 = credential.content) === null || _credential$content28 === void 0 ? void 0 : (_credential$content29 = _credential$content28.credentialSubject) === null || _credential$content29 === void 0 ? void 0 : _credential$content29.provider.replace('TwitterTweetGT', '');
-    provider = /*#__PURE__*/React.createElement(Fragment, null, /*#__PURE__*/React.createElement(TwitterIcon, {
+    provider = /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(TwitterIcon, {
       style: {
         marginRight: 4,
         color: "#1DA1F2"
@@ -2784,7 +2784,7 @@ const GitcoinProvider = ({
   if ((_credential$content30 = credential.content) !== null && _credential$content30 !== void 0 && (_credential$content31 = _credential$content30.credentialSubject) !== null && _credential$content31 !== void 0 && _credential$content31.provider.includes('gtcPossessionsGte')) {
     var _credential$content32, _credential$content33;
     let countGtc = (_credential$content32 = credential.content) === null || _credential$content32 === void 0 ? void 0 : (_credential$content33 = _credential$content32.credentialSubject) === null || _credential$content33 === void 0 ? void 0 : _credential$content33.provider.replace('gtcPossessionsGte#', '');
-    provider = /*#__PURE__*/React.createElement(Fragment, null, /*#__PURE__*/React.createElement("span", null, "Owns at least ", /*#__PURE__*/React.createElement("span", {
+    provider = /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("span", null, "Owns at least ", /*#__PURE__*/React.createElement("span", {
       className: "primary bold"
     }, countGtc)), /*#__PURE__*/React.createElement("img", {
       src: "/img/icons/gtc-logo.webp",
@@ -2796,7 +2796,7 @@ const GitcoinProvider = ({
   }
   switch ((_credential$content34 = credential.content) === null || _credential$content34 === void 0 ? void 0 : (_credential$content35 = _credential$content34.credentialSubject) === null || _credential$content35 === void 0 ? void 0 : _credential$content35.provider) {
     case 'Twitter':
-      provider = /*#__PURE__*/React.createElement(Fragment, null, "Has a ", /*#__PURE__*/React.createElement(TwitterIcon, {
+      provider = /*#__PURE__*/React.createElement(React.Fragment, null, "Has a ", /*#__PURE__*/React.createElement(TwitterIcon, {
         style: {
           marginLeft: 3,
           marginRight: 3,
@@ -2805,7 +2805,7 @@ const GitcoinProvider = ({
       }), " account");
       break;
     case 'Github':
-      provider = /*#__PURE__*/React.createElement(Fragment, null, "Has a ", /*#__PURE__*/React.createElement(GithubIcon, {
+      provider = /*#__PURE__*/React.createElement(React.Fragment, null, "Has a ", /*#__PURE__*/React.createElement(GithubIcon, {
         style: {
           marginLeft: 3,
           marginRight: 3
@@ -2813,7 +2813,7 @@ const GitcoinProvider = ({
       }), " account");
       break;
     case 'StarredGithubRepoProvider':
-      provider = /*#__PURE__*/React.createElement(Fragment, null, "Has stars on ", /*#__PURE__*/React.createElement(GithubIcon, {
+      provider = /*#__PURE__*/React.createElement(React.Fragment, null, "Has stars on ", /*#__PURE__*/React.createElement(GithubIcon, {
         style: {
           marginLeft: 3,
           marginRight: 3
@@ -2821,7 +2821,7 @@ const GitcoinProvider = ({
       }), " repositories");
       break;
     case 'TenOrMoreGithubFollowers':
-      provider = /*#__PURE__*/React.createElement(Fragment, null, "Has at least 10 ", /*#__PURE__*/React.createElement(GithubIcon, {
+      provider = /*#__PURE__*/React.createElement(React.Fragment, null, "Has at least 10 ", /*#__PURE__*/React.createElement(GithubIcon, {
         style: {
           marginLeft: 3,
           marginRight: 3
@@ -2829,7 +2829,7 @@ const GitcoinProvider = ({
       }), " followers");
       break;
     case 'ForkedGithubRepoProvider':
-      provider = /*#__PURE__*/React.createElement(Fragment, null, "Forked some ", /*#__PURE__*/React.createElement(GithubIcon, {
+      provider = /*#__PURE__*/React.createElement(React.Fragment, null, "Forked some ", /*#__PURE__*/React.createElement(GithubIcon, {
         style: {
           marginLeft: 3,
           marginRight: 3
@@ -2837,7 +2837,7 @@ const GitcoinProvider = ({
       }), " repositories");
       break;
     case 'FiveOrMoreGithubRepos':
-      provider = /*#__PURE__*/React.createElement(Fragment, null, "Owns at least ", /*#__PURE__*/React.createElement("span", {
+      provider = /*#__PURE__*/React.createElement(React.Fragment, null, "Owns at least ", /*#__PURE__*/React.createElement("span", {
         className: "primary bold"
       }, "5"), " ", /*#__PURE__*/React.createElement(GithubIcon, {
         style: {
@@ -2847,27 +2847,27 @@ const GitcoinProvider = ({
       }), " repositories");
       break;
     case 'Poh':
-      provider = /*#__PURE__*/React.createElement(Fragment, null, "Human on Proof of Humanity");
+      provider = /*#__PURE__*/React.createElement(React.Fragment, null, "Human on Proof of Humanity");
       break;
     case 'Ens':
-      provider = /*#__PURE__*/React.createElement(Fragment, null, "Has an ENS name");
+      provider = /*#__PURE__*/React.createElement(React.Fragment, null, "Has an ENS name");
       break;
     case 'Discord':
-      provider = /*#__PURE__*/React.createElement(Fragment, null, "Has a ", /*#__PURE__*/React.createElement("img", {
+      provider = /*#__PURE__*/React.createElement(React.Fragment, null, "Has a ", /*#__PURE__*/React.createElement("img", {
         src: "/img/icons/discord-logo.png",
         height: "17",
         className: "mleft-4 mright-4"
       }), " account");
       break;
     case 'Linkedin':
-      provider = /*#__PURE__*/React.createElement(Fragment, null, "Has a ", /*#__PURE__*/React.createElement("img", {
+      provider = /*#__PURE__*/React.createElement(React.Fragment, null, "Has a ", /*#__PURE__*/React.createElement("img", {
         src: "/img/icons/linkedin-logo.png",
         height: "17",
         className: "mleft-4 mright-4"
       }), " account");
       break;
     case 'Google':
-      provider = /*#__PURE__*/React.createElement(Fragment, null, "Has a ", /*#__PURE__*/React.createElement(GoogleIcon, {
+      provider = /*#__PURE__*/React.createElement(React.Fragment, null, "Has a ", /*#__PURE__*/React.createElement(GoogleIcon, {
         style: {
           marginLeft: 3,
           marginRight: 3
@@ -2987,7 +2987,7 @@ function FollowButton({
       ref: followHoverRef
     }, isFollowHovered ? /*#__PURE__*/React.createElement(Button, {
       color: "red"
-    }, "Unfollow") : /*#__PURE__*/React.createElement(Fragment, null, /*#__PURE__*/React.createElement(Button, {
+    }, "Unfollow") : /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(Button, {
       color: "green-transparent"
     }, /*#__PURE__*/React.createElement(CheckIcon, {
       color: getThemeValue("color", theme, "green"),
@@ -3089,7 +3089,7 @@ function UserEditProfile({
         return null;
     }
   };
-  return /*#__PURE__*/React.createElement(Fragment, null, /*#__PURE__*/React.createElement("div", {
+  return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("div", {
     className: styles$8.userEditContainer
   }, /*#__PURE__*/React.createElement("div", {
     className: styles$8.userEditPfpContainer
@@ -3270,7 +3270,7 @@ const OneAccessRule = ({
         }
       }, "Requires ownership of:"), /*#__PURE__*/React.createElement(AccessRuleToken, {
         requiredToken: accessRule.requiredToken
-      }), accessRule.requiredToken && accessRule.requiredToken.attributes_required && accessRule.requiredToken.attributes_required.length > 0 && /*#__PURE__*/React.createElement(Fragment, null, /*#__PURE__*/React.createElement("span", {
+      }), accessRule.requiredToken && accessRule.requiredToken.attributes_required && accessRule.requiredToken.attributes_required.length > 0 && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("span", {
         style: {
           fontSize: 13,
           color: getThemeValue("color", theme, "secondary"),
@@ -3811,7 +3811,7 @@ function Postbox({
         color: getThemeValue("color", theme, "main"),
         ...getThemeValue("font", theme, "buttons")
       }
-    }, /*#__PURE__*/React.createElement(LoadingCircle, null), " Sending") : /*#__PURE__*/React.createElement(Fragment, null, defaultPost && /*#__PURE__*/React.createElement(Button, {
+    }, /*#__PURE__*/React.createElement(LoadingCircle, null), " Sending") : /*#__PURE__*/React.createElement(React.Fragment, null, defaultPost && /*#__PURE__*/React.createElement(Button, {
       color: "secondary",
       style: {
         marginRight: 5
@@ -4249,7 +4249,7 @@ function Post({
     href: "https://cerscan.com/mainnet/stream/" + post.stream_id,
     rel: "noreferrer",
     target: "_blank"
-  }, "Proof")), user && user.did == post.creator && /*#__PURE__*/React.createElement(Fragment, null, /*#__PURE__*/React.createElement("span", {
+  }, "Proof")), user && user.did == post.creator && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("span", {
     style: {
       marginLeft: "0.5rem",
       marginRight: "0.5rem",
@@ -4388,7 +4388,7 @@ const PostBody = ({
       }
     });
   };
-  return /*#__PURE__*/React.createElement(Fragment, null, /*#__PURE__*/React.createElement(Body, null), _showViewMore && /*#__PURE__*/React.createElement(Fragment, null, charLimit && ((_post$content2 = post.content) === null || _post$content2 === void 0 ? void 0 : (_post$content2$body = _post$content2.body) === null || _post$content2$body === void 0 ? void 0 : _post$content2$body.length) > charLimit ? /*#__PURE__*/React.createElement(Fragment, null, /*#__PURE__*/React.createElement("div", {
+  return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(Body, null), _showViewMore && /*#__PURE__*/React.createElement(React.Fragment, null, charLimit && ((_post$content2 = post.content) === null || _post$content2 === void 0 ? void 0 : (_post$content2$body = _post$content2.body) === null || _post$content2$body === void 0 ? void 0 : _post$content2$body.length) > charLimit ? /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("div", {
     className: styles$b.postViewMoreCtaContainer
   }, /*#__PURE__*/React.createElement(Button, {
     color: "secondary",
@@ -4396,7 +4396,7 @@ const PostBody = ({
       marginRight: 5
     },
     onClick: () => setCharLimit(null)
-  }, "View more"))) : /*#__PURE__*/React.createElement(Fragment, null, ((_post$indexing_metada = post.indexing_metadata) === null || _post$indexing_metada === void 0 ? void 0 : _post$indexing_metada.urlMetadata) && ((_post$creator_details = post.creator_details) === null || _post$creator_details === void 0 ? void 0 : _post$creator_details.a_r) > 15 && /*#__PURE__*/React.createElement(LinkCard, {
+  }, "View more"))) : /*#__PURE__*/React.createElement(React.Fragment, null, ((_post$indexing_metada = post.indexing_metadata) === null || _post$indexing_metada === void 0 ? void 0 : _post$indexing_metada.urlMetadata) && ((_post$creator_details = post.creator_details) === null || _post$creator_details === void 0 ? void 0 : _post$creator_details.a_r) > 15 && /*#__PURE__*/React.createElement(LinkCard, {
     metadata: post.indexing_metadata.urlMetadata
   }))));
 };
@@ -4447,7 +4447,7 @@ const LinkCard = ({
       color: theme !== null && theme !== void 0 && (_theme$color4 = theme.color) !== null && _theme$color4 !== void 0 && _theme$color4.secondary ? theme.color.secondary : defaultTheme.color.secondary,
       fontSize: 15
     }
-  }, metadata.description.length > 155 ? /*#__PURE__*/React.createElement(Fragment, null, metadata.description, "...") : /*#__PURE__*/React.createElement(Fragment, null, metadata.description))));
+  }, metadata.description.length > 155 ? /*#__PURE__*/React.createElement(React.Fragment, null, metadata.description, "...") : /*#__PURE__*/React.createElement(React.Fragment, null, metadata.description))));
 };
 const PostMenu = ({
   stream_id,
@@ -4545,7 +4545,7 @@ function ConnectModal({
   }, authMethods.includes("metamask") && /*#__PURE__*/React.createElement(WalletButton, {
     lit: lit,
     type: "metamask",
-    label: /*#__PURE__*/React.createElement(Fragment, null, /*#__PURE__*/React.createElement(MetamaskIcon, {
+    label: /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(MetamaskIcon, {
       className: "mr-2"
     }), " Metamask"),
     bg: "#F18F62",
@@ -4555,7 +4555,7 @@ function ConnectModal({
   }), authMethods.includes("wallet-connect") && /*#__PURE__*/React.createElement(WalletButton, {
     lit: lit,
     type: "wallet-connect",
-    label: /*#__PURE__*/React.createElement(Fragment, null, /*#__PURE__*/React.createElement(WalletConnectIcon, {
+    label: /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(WalletConnectIcon, {
       className: "mr-2"
     }), " WalletConnect"),
     bg: "#468DEE",
@@ -4565,7 +4565,7 @@ function ConnectModal({
   }), authMethods.includes("phantom") && /*#__PURE__*/React.createElement(WalletButton, {
     lit: lit,
     type: "phantom",
-    label: /*#__PURE__*/React.createElement(Fragment, null, /*#__PURE__*/React.createElement(PhantomIcon, {
+    label: /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(PhantomIcon, {
       className: "mr-2"
     }), " Phantom"),
     bg: "#6450E3",
@@ -4575,7 +4575,7 @@ function ConnectModal({
   }), authMethods.includes("email") && /*#__PURE__*/React.createElement(WalletButton, {
     lit: lit,
     type: "email",
-    label: /*#__PURE__*/React.createElement(Fragment, null, /*#__PURE__*/React.createElement(EmailIcon, {
+    label: /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(EmailIcon, {
       className: "mr-2"
     }), " Email"),
     bg: "#000",
@@ -4585,7 +4585,7 @@ function ConnectModal({
   }), authMethods.includes("google") && /*#__PURE__*/React.createElement(WalletButton, {
     lit: lit,
     type: "google",
-    label: /*#__PURE__*/React.createElement(Fragment, null, /*#__PURE__*/React.createElement(GoogleIcon$1, {
+    label: /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(GoogleIcon$1, {
       className: "mr-2"
     }), " Google"),
     bg: "#F2F2F2",
@@ -5190,7 +5190,7 @@ const ChatContent = ({
     style: {
       color: getThemeValue("color", theme, "main")
     }
-  }, /*#__PURE__*/React.createElement(LoadingCircle, null)) : /*#__PURE__*/React.createElement(Fragment, null, comments.length <= 0 ? /*#__PURE__*/React.createElement("div", {
+  }, /*#__PURE__*/React.createElement(LoadingCircle, null)) : /*#__PURE__*/React.createElement(React.Fragment, null, comments.length <= 0 ? /*#__PURE__*/React.createElement("div", {
     className: styles$c.commentsEmptyStateContainer
   }, /*#__PURE__*/React.createElement("p", {
     style: {
@@ -5324,7 +5324,7 @@ const CommentsContent = ({
     style: {
       color: getThemeValue("color", theme, "main")
     }
-  }, /*#__PURE__*/React.createElement(LoadingCircle, null)) : /*#__PURE__*/React.createElement(Fragment, null, comments.length <= 0 ? /*#__PURE__*/React.createElement("div", {
+  }, /*#__PURE__*/React.createElement(LoadingCircle, null)) : /*#__PURE__*/React.createElement(React.Fragment, null, comments.length <= 0 ? /*#__PURE__*/React.createElement("div", {
     className: styles$d.commentsEmptyStateContainer
   }, /*#__PURE__*/React.createElement("p", {
     style: {
@@ -5509,11 +5509,11 @@ const InboxContent = () => {
     }
   }, /*#__PURE__*/React.createElement(HeaderInbox, null)), isExpanded && /*#__PURE__*/React.createElement("div", {
     className: styles$e.inboxContent
-  }, user ? /*#__PURE__*/React.createElement(Fragment, null, conversationSelected ? /*#__PURE__*/React.createElement(Fragment, null, /*#__PURE__*/React.createElement("div", {
+  }, user ? /*#__PURE__*/React.createElement(React.Fragment, null, conversationSelected ? /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("div", {
     className: styles$e.messagesContainer
   }, /*#__PURE__*/React.createElement(Messages, null)), /*#__PURE__*/React.createElement("div", {
     className: "flex w-full border-gray-100 border-t bg-white px-3 py-3 flex-row"
-  }, /*#__PURE__*/React.createElement(MessageBox, null))) : /*#__PURE__*/React.createElement(Fragment, null, user.hasLit ? /*#__PURE__*/React.createElement("ul", {
+  }, /*#__PURE__*/React.createElement(MessageBox, null))) : /*#__PURE__*/React.createElement(React.Fragment, null, user.hasLit ? /*#__PURE__*/React.createElement("ul", {
     role: "list",
     className: styles$e.conversationsContainer
   }, /*#__PURE__*/React.createElement(LoopConversations, {
@@ -6136,7 +6136,7 @@ const LinkCard$1 = ({
     style: {
       color: theme !== null && theme !== void 0 && (_theme$color10 = theme.color) !== null && _theme$color10 !== void 0 && _theme$color10.secondary ? theme.color.secondary : defaultTheme.color.secondary
     }
-  }, metadata.description.length > 155 ? /*#__PURE__*/React.createElement(Fragment, null, metadata.description, "...") : /*#__PURE__*/React.createElement(Fragment, null, metadata.description))))));
+  }, metadata.description.length > 155 ? /*#__PURE__*/React.createElement(React.Fragment, null, metadata.description, "...") : /*#__PURE__*/React.createElement(React.Fragment, null, metadata.description))))));
 };
 
 en.long.minute = {
