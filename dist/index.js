@@ -4329,7 +4329,7 @@ function Post({
       color: getThemeValue("color", theme, "active"),
       ...getThemeValue("font", theme, "actions")
     },
-    onClick: () => like(null)
+    onClick: () => like('unlike')
   }, /*#__PURE__*/React.createElement(LikeIcon, {
     type: "full"
   }), "Liked") : /*#__PURE__*/React.createElement("button", {
