@@ -200,7 +200,7 @@ export default function Post({ post, showPfp = true, showCta = true, characterLi
               {/** Like button */}
               <span style={{ marginLeft: "0.75rem", flexDirection: "row", display: "flex" }}>
                 {userReaction == "like" ?
-                  <button className={styles.postActionButton} style={{ color: getThemeValue("color", theme, "active"), ...getThemeValue("font", theme, "actions") }} onClick={() => like(null)}>
+                  <button className={styles.postActionButton} style={{ color: getThemeValue("color", theme, "active"), ...getThemeValue("font", theme, "actions") }} onClick={() => like('unlike')}>
                     <LikeIcon type="full" />
                     Liked
                   </button>
