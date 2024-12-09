@@ -20,7 +20,7 @@ import styles from './Post.module.css';
 import { marked } from 'marked';
 
 /** Display the post details */
-export default function Post({post, showPfp = true, showCta = true, characterLimit = null, showReplyTo = false, setReply = null, defaultReply = null}) {
+export default function Post({ post, showPfp = true, showCta = true, characterLimit = null, showReplyTo = false, setReply = null, defaultReply = null }) {
   const { user, setUser, orbis, theme, hasAccess } = useOrbis();
   const [editPost, setEditPost] = useState(false);
   const [isDeleted, setIsDeleted] = useState(false);
@@ -28,9 +28,10 @@ export default function Post({post, showPfp = true, showCta = true, characterLim
   const [userReaction, setUserReaction] = useState();
   const [postMenuVis, setPostMenuVis] = useState(false);
   const [hoverRef, isHovered] = useHover();
+  const [isLoading, setLoading] = useState(false)
 
   useEffect(() => {
-    if(user) {
+    if (user) {
       getUserReaction();
     }
   }, [user]);
@@ -42,7 +43,7 @@ export default function Post({post, showPfp = true, showCta = true, characterLim
 
   /** Will reply to a post either by replying within the post or by adding the reply in the main PostBox (for chat) */
   function replyToPost(post) {
-    if(setReply) {
+    if (setReply) {
       setReply(post);
     } else {
       _setReply(post);
@@ -53,19 +54,21 @@ export default function Post({post, showPfp = true, showCta = true, characterLim
   async function getUserReaction() {
     let { data, error } = await orbis.getReaction(post.stream_id, user.did);
 
-    if(data) {
+    if (data) {
       setUserReaction(data.type);
     }
   }
-
   /** To like a post */
   async function like(type) {
-    if(!user) {
-      alert("You must be connected to react to posts.");
-      return;
+    if (!user) {
+      setLoading(true)
+      const res = await orbis.connect_v2({});
+      setUser(res.details)
+      setLoading(false)
+      return
     }
 
-    if(!hasAccess) {
+    if (!hasAccess) {
       alert("You need the required credentials to react to posts in this feed.");
       return;
     }
@@ -77,7 +80,7 @@ export default function Post({post, showPfp = true, showCta = true, characterLim
     let res = await orbis.react(post.stream_id, type);
 
     /** Check results */
-    switch(res.status) {
+    switch (res.status) {
       case 300:
         console.log("Error reacting to the post:", res);
         break;
@@ -85,31 +88,31 @@ export default function Post({post, showPfp = true, showCta = true, characterLim
   }
 
   /** Unselect reply when new post is shared */
-  function callbackShared(){
+  function callbackShared() {
     replyToPost(false);
   }
 
   /** Called when a post is being edited with success */
-  function callbackEdit(content){
+  function callbackEdit(content) {
     setEditPost(false);
     post.content = content;
   }
 
   /** If the post has been deleted from the front-end we hide it in the UI */
-  if(isDeleted) {
+  if (isDeleted) {
     return null;
   }
 
-  return(
+  return (
     <div className={styles.postContainer}>
       {/** Showing reply to if available */}
       {(showReplyTo && post.reply_to_details) &&
         <div className={styles.replyToContainer}>
-          <div style={{display: "flex", marginRight: 10}}>
+          <div style={{ display: "flex", marginRight: 10 }}>
             <div className={styles.linkReply} style={{ borderColor: getThemeValue("border", theme, "main") }}></div>
             <UserPfp details={post.reply_to_creator_details} height={30} hover={false} />
           </div>
-          <div style={{display: "flex"}}>
+          <div style={{ display: "flex" }}>
             <PostBody
               showViewMore={false}
               post={{
@@ -122,10 +125,10 @@ export default function Post({post, showPfp = true, showCta = true, characterLim
       }
 
       {/** Post content */}
-      <div style={{display: "flex", flexDirection: "row", width: "100%"}}>
+      <div style={{ display: "flex", flexDirection: "row", width: "100%" }}>
         {/** Show PFP based on component paramaters */}
         {showPfp &&
-          <div style={{position: "relative"}} ref={hoverRef}>
+          <div style={{ position: "relative" }} ref={hoverRef}>
             <UserPfp details={post.creator_details} hover={false} />
             <UserPopup visible={isHovered} details={post.creator_details} />
           </div>
@@ -137,22 +140,22 @@ export default function Post({post, showPfp = true, showCta = true, characterLim
           {showPfp &&
             <div className={styles.postDetailsContainerMetadata}>
               <div className={styles.postDetailsContainerUser}>
-                <span className={styles.postDetailsContainerUsername} style={{...getThemeValue("font", theme, "main"), color: getThemeValue("color", theme, "main")}}><Username details={post.creator_details} /></span>
-                <div className={styles.hideMobile} style={{marginLeft: "0.5rem"}}><UserBadge details={post.creator_details} /></div>
+                <span className={styles.postDetailsContainerUsername} style={{ ...getThemeValue("font", theme, "main"), color: getThemeValue("color", theme, "main") }}><Username details={post.creator_details} /></span>
+                <div className={styles.hideMobile} style={{ marginLeft: "0.5rem" }}><UserBadge details={post.creator_details} /></div>
               </div>
-              <div className={styles.postDetailsContainerTimestamp} style={{fontSize: 12, color: theme?.color?.secondary ? theme.color.secondary : defaultTheme.color.secondary}}>
-                <ReactTimeAgo style={{display: "flex", fontSize: 12, ...getThemeValue("font", theme, "actions")}} date={post.timestamp * 1000} locale="en-US" />
+              <div className={styles.postDetailsContainerTimestamp} style={{ fontSize: 12, color: theme?.color?.secondary ? theme.color.secondary : defaultTheme.color.secondary }}>
+                <ReactTimeAgo style={{ display: "flex", fontSize: 12, ...getThemeValue("font", theme, "actions") }} date={post.timestamp * 1000} locale="en-US" />
                 <div className={styles.hideMobile}>
-                  <span style={{marginLeft: "0.5rem", marginRight: "0.5rem", color: getThemeValue("color", theme, "secondary"), ...getThemeValue("font", theme, "actions")}}>·</span>
-                  <a style={{textDecoration: "none", color: getThemeValue("color", theme, "secondary"), ...getThemeValue("font", theme, "actions")}} href={"https://cerscan.com/mainnet/stream/" + post.stream_id} rel="noreferrer" target="_blank">Proof</a>
+                  <span style={{ marginLeft: "0.5rem", marginRight: "0.5rem", color: getThemeValue("color", theme, "secondary"), ...getThemeValue("font", theme, "actions") }}>·</span>
+                  <a style={{ textDecoration: "none", color: getThemeValue("color", theme, "secondary"), ...getThemeValue("font", theme, "actions") }} href={"https://cerscan.com/mainnet/stream/" + post.stream_id} rel="noreferrer" target="_blank">Proof</a>
                 </div>
                 {/** Show action if user is connected */}
                 {user && user.did == post.creator &&
                   <>
-                    <span style={{marginLeft: "0.5rem", marginRight: "0.5rem", color: getThemeValue("color", theme, "secondary")}}>·</span>
-                    <div style={{alignItems: "center", display: "flex"}}>
+                    <span style={{ marginLeft: "0.5rem", marginRight: "0.5rem", color: getThemeValue("color", theme, "secondary") }}>·</span>
+                    <div style={{ alignItems: "center", display: "flex" }}>
                       {/** Button to edit a post */}
-                      <div style={{display: "flex", cursor: "pointer", color: getThemeValue("color", theme, "secondary")}} onClick={() => setPostMenuVis(true)}>
+                      <div style={{ display: "flex", cursor: "pointer", color: getThemeValue("color", theme, "secondary") }} onClick={() => setPostMenuVis(true)}>
                         <MenuHorizontal />
                       </div>
 
@@ -171,8 +174,8 @@ export default function Post({post, showPfp = true, showCta = true, characterLim
             <div style={{ marginTop: "0.5rem" }}>
               <Postbox showPfp={false} defaultPost={post} reply={reply} callback={callbackEdit} rows="1" ctaTitle="Edit" ctaStyle={styles.postReplyCta} setEditPost={setEditPost} />
             </div>
-          :
-            <div style={{display: "flex", flexDirection: "column"}}>
+            :
+            <div style={{ display: "flex", flexDirection: "column" }}>
               <PostBody post={post} characterLimit={characterLimit} />
             </div>
           }
@@ -182,12 +185,12 @@ export default function Post({post, showPfp = true, showCta = true, characterLim
             <div className={styles.postActionsContainer}>
               {/** Reply button */}
               {(reply && reply.stream_id == post.stream_id) ?
-                <button type="button" className={styles.postActionButton} style={{color: getThemeValue("color", theme, "active"), ...getThemeValue("font", theme, "actions")}} onClick={() => replyToPost(null)}>
+                <button disabled={isLoading} type="button" className={styles.postActionButton} style={{ color: getThemeValue("color", theme, "active"), ...getThemeValue("font", theme, "actions") }} onClick={() => replyToPost(null)}>
                   <ReplyIcon type="full" />
                   Reply
                 </button>
-              :
-                <button type="button" className={styles.postActionButton} style={{color: getThemeValue("color", theme, "secondary"), ...getThemeValue("font", theme, "actions")}} onClick={() => replyToPost(post)}>
+                :
+                <button disabled={isLoading} type="button" className={styles.postActionButton} style={{ color: getThemeValue("color", theme, "secondary"), ...getThemeValue("font", theme, "actions") }} onClick={() => replyToPost(post)}>
                   <ReplyIcon type="line" />
                   Reply
                 </button>
@@ -195,14 +198,14 @@ export default function Post({post, showPfp = true, showCta = true, characterLim
 
 
               {/** Like button */}
-              <span style={{marginLeft: "0.75rem", flexDirection: "row", display: "flex"}}>
+              <span style={{ marginLeft: "0.75rem", flexDirection: "row", display: "flex" }}>
                 {userReaction == "like" ?
-                  <button className={styles.postActionButton} style={{color: getThemeValue("color", theme, "active"), ...getThemeValue("font", theme, "actions")}} onClick={() => like(null)}>
+                  <button className={styles.postActionButton} style={{ color: getThemeValue("color", theme, "active"), ...getThemeValue("font", theme, "actions") }} onClick={() => like(null)}>
                     <LikeIcon type="full" />
                     Liked
                   </button>
-                :
-                  <button className={styles.postActionButton} style={{color: getThemeValue("color", theme, "secondary"), ...getThemeValue("font", theme, "actions")}} onClick={() => like("like")}>
+                  :
+                  <button disabled={isLoading} className={styles.postActionButton} style={{ color: getThemeValue("color", theme, "secondary"), ...getThemeValue("font", theme, "actions") }} onClick={() => like("like")}>
                     <LikeIcon type="line" />
                     Like
                   </button>
@@ -226,7 +229,7 @@ export default function Post({post, showPfp = true, showCta = true, characterLim
 
           {/** Show postbox */}
           {(reply && reply.stream_id == post.stream_id && !defaultReply) &&
-            <div style={{marginTop: 8}}>
+            <div style={{ marginTop: 8 }}>
               <Postbox reply={reply} callback={callbackShared} placeholder="Add your reply..." rows="1" ctaTitle="Reply" ctaStyle={styles.postReplyCta} />
             </div>
           }
@@ -237,7 +240,7 @@ export default function Post({post, showPfp = true, showCta = true, characterLim
 }
 
 /** Body of the post */
-const PostBody = ({post, characterLimit, showViewMore = true}) => {
+const PostBody = ({ post, characterLimit, showViewMore = true }) => {
   const { theme } = useOrbis();
   const [charLimit, setCharLimit] = useState(characterLimit);
   const [body, setBody] = useState(post?.content?.body ? post.content.body : "");
@@ -245,9 +248,9 @@ const PostBody = ({post, characterLimit, showViewMore = true}) => {
   useEffect(() => {
     let _body = post.content.body;
     let mentions = post.content.mentions;
-    if(mentions && mentions.length > 0) {
+    if (mentions && mentions.length > 0) {
       mentions.forEach((mention, i) => {
-        _body = _body.replaceAll(mention.username, "**"+mention.username+"**");
+        _body = _body.replaceAll(mention.username, "**" + mention.username + "**");
       });
     }
 
@@ -256,12 +259,12 @@ const PostBody = ({post, characterLimit, showViewMore = true}) => {
   }, [post])
 
   const Body = () => {
-    return(
-      <div className={styles.postContent} style={{...getThemeValue("font", theme, "secondary"), color: getThemeValue("color", theme, "main")}} dangerouslySetInnerHTML={{__html: marked.parse(charLimit ? body?.substring(0, charLimit) + "..." : body )}}></div>
+    return (
+      <div className={styles.postContent} style={{ ...getThemeValue("font", theme, "secondary"), color: getThemeValue("color", theme, "main") }} dangerouslySetInnerHTML={{ __html: marked.parse(charLimit ? body?.substring(0, charLimit) + "..." : body) }}></div>
     )
   };
 
-  return(
+  return (
     <>
       <Body />
 
@@ -272,7 +275,7 @@ const PostBody = ({post, characterLimit, showViewMore = true}) => {
             <>
               {/** Display view more button if over body content over the character limit */}
               <div className={styles.postViewMoreCtaContainer}>
-                <Button color="secondary" style={{marginRight: 5}} onClick={() => setCharLimit(null)}>View more</Button>
+                <Button color="secondary" style={{ marginRight: 5 }} onClick={() => setCharLimit(null)}>View more</Button>
               </div>
             </>
             :
@@ -291,14 +294,14 @@ const PostBody = ({post, characterLimit, showViewMore = true}) => {
 }
 
 /** Card to display's url metadata */
-const LinkCard = ({metadata}) => {
+const LinkCard = ({ metadata }) => {
   const { theme } = useContext(GlobalContext);
-  return(
-    <div className={styles.postUrlMetadataContainer} style={{background: theme?.bg?.secondary ? theme.bg.secondary : defaultTheme.bg.secondary, borderColor: theme?.border?.main ? theme.border.main : defaultTheme.border.main, maxWidth: 480 }}>
+  return (
+    <div className={styles.postUrlMetadataContainer} style={{ background: theme?.bg?.secondary ? theme.bg.secondary : defaultTheme.bg.secondary, borderColor: theme?.border?.main ? theme.border.main : defaultTheme.border.main, maxWidth: 480 }}>
       {/** Show image if any */}
       {metadata.image &&
         <a href={metadata.url} target="_blank" rel="noreferrer">
-          <div className={styles.postUrlMetadataImage} style={{backgroundImage: "url(" + metadata.image + ")"}}></div>
+          <div className={styles.postUrlMetadataImage} style={{ backgroundImage: "url(" + metadata.image + ")" }}></div>
         </a>
       }
 
@@ -306,13 +309,13 @@ const LinkCard = ({metadata}) => {
       <div className={styles.postUrlMetadataDetails} style={{ borderColor: theme?.border?.secondary ? theme.border.secondary : defaultTheme.border.secondary }}>
         {/** Show source if any */}
         {metadata.source &&
-          <p style={{color: theme?.color?.active ? theme.color.active : defaultTheme.color.active, ...getThemeValue("font", theme, "secondary"), fontSize: 13, fontWeight: 500 }}>{metadata.source}</p>
+          <p style={{ color: theme?.color?.active ? theme.color.active : defaultTheme.color.active, ...getThemeValue("font", theme, "secondary"), fontSize: 13, fontWeight: 500 }}>{metadata.source}</p>
         }
-        <h3 style={{color: theme?.color?.main ? theme.color.main : defaultTheme.color.main, fontSize: 17, fontWeight: 500, lineHeight: "1.5rem" }}>{metadata.title}</h3>
+        <h3 style={{ color: theme?.color?.main ? theme.color.main : defaultTheme.color.main, fontSize: 17, fontWeight: 500, lineHeight: "1.5rem" }}>{metadata.title}</h3>
 
         {/** Show description if any */}
         {metadata.description &&
-          <p style={{color: theme?.color?.secondary ? theme.color.secondary : defaultTheme.color.secondary, fontSize: 15 }}>{metadata.description.length > 155 ? <>{metadata.description}...</> : <>{metadata.description}</>}</p>
+          <p style={{ color: theme?.color?.secondary ? theme.color.secondary : defaultTheme.color.secondary, fontSize: 15 }}>{metadata.description.length > 155 ? <>{metadata.description}...</> : <>{metadata.description}</>}</p>
         }
       </div>
     </div>
@@ -343,7 +346,7 @@ const PostMenu = ({ stream_id, setPostMenuVis, setEditPost, setIsDeleted }) => {
 
   /** Hide menu */
   function hide() {
-    if(deletingStatus == 2) {
+    if (deletingStatus == 2) {
       setIsDeleted(true);
     }
     setPostMenuVis(false);
@@ -352,13 +355,13 @@ const PostMenu = ({ stream_id, setPostMenuVis, setEditPost, setIsDeleted }) => {
   function DeleteButton() {
     switch (deletingStatus) {
       case 0:
-        return(
+        return (
           <div class="text-red-700 hover:bg-gray-50 flex items-center px-3 py-2 text-sm font-medium rounded-md cursor-pointer" onClick={() => _delete(true)}>Delete</div>
         )
 
       /** Loading */
       case 1:
-        return(
+        return (
           <div class="text-red-700 flex items-center px-3 py-2 text-sm font-medium rounded-md">
             <LoadingCircle color="text-red-700" />
             <span class="truncate">Deleting</span>
@@ -367,7 +370,7 @@ const PostMenu = ({ stream_id, setPostMenuVis, setEditPost, setIsDeleted }) => {
 
       /** Success */
       case 2:
-        return(
+        return (
           <div class="text-green-700 flex items-center px-3 py-2 text-sm font-medium rounded-md">
             <span class="truncate mr-2">Deleted</span>
           </div>
@@ -375,10 +378,10 @@ const PostMenu = ({ stream_id, setPostMenuVis, setEditPost, setIsDeleted }) => {
     }
   }
 
-  return(
-    <div className={styles.postMenuContainer} ref={wrapperRef} style={{right: 10, background: theme?.bg?.secondary ? theme.bg.secondary : defaultTheme.bg.secondary, borderColor: theme?.border?.main ? theme.border.main : defaultTheme.border.main }}>
+  return (
+    <div className={styles.postMenuContainer} ref={wrapperRef} style={{ right: 10, background: theme?.bg?.secondary ? theme.bg.secondary : defaultTheme.bg.secondary, borderColor: theme?.border?.main ? theme.border.main : defaultTheme.border.main }}>
       {/** Edit button */}
-      <div class="flex items-center px-3 py-2 text-sm font-medium rounded-md cursor-pointer" style={{color: theme?.color?.main ? theme.color.main : defaultTheme.color.main}} aria-current="page" onClick={() => edit(true)}>Edit</div>
+      <div class="flex items-center px-3 py-2 text-sm font-medium rounded-md cursor-pointer" style={{ color: theme?.color?.main ? theme.color.main : defaultTheme.color.main }} aria-current="page" onClick={() => edit(true)}>Edit</div>
 
       {/** Delete button */}
       <DeleteButton />
