@@ -5324,7 +5324,7 @@ const CommentsContent = ({
     style: {
       color: getThemeValue("color", theme, "main")
     }
-  }, /*#__PURE__*/React.createElement(LoadingCircle, null)) : /*#__PURE__*/React.createElement(React.Fragment, null, comments.length <= 0 ? /*#__PURE__*/React.createElement("div", {
+  }, /*#__PURE__*/React.createElement(LoadingCircle, null)) : /*#__PURE__*/React.createElement(React.Fragment, null, (comments === null || comments === void 0 ? void 0 : comments.length) <= 0 ? /*#__PURE__*/React.createElement("div", {
     className: styles$d.commentsEmptyStateContainer
   }, /*#__PURE__*/React.createElement("p", {
     style: {
