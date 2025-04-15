@@ -79,7 +79,7 @@ const CommentsContent = ({characterLimit, master}) => {
             </div>
           :
             <>
-              {comments.length <= 0 ?
+              {comments?.length <= 0 ?
                 <div className={styles.commentsEmptyStateContainer}>
                   <p style={{ color: getThemeValue("color", theme, "secondary"), fontSize: 15, marginTop: "0.5rem", marginBottom: "0.5rem" }}>Be the first to leave a comment here.</p>
                   <EmptyStateComments />
